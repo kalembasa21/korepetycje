@@ -3,14 +3,37 @@
 body {
   font-family: "Poppins", sans-serif;
   font-weight: 300;
-  line-height: 1.7;
   color: #ffb434;
   background-color: #fff;
+}
+
+header{
+  width: 100%;
+  height: auto;
+  background-color: #0452a4;
+}
+
+.top-container{
+  height: auto;
+  width: 100%;
+  text-align: center;
+  padding-top: 10px;
+}
+
+.top-container img{
+  height: auto;
+  width: 100%;
 }
 
 p {
   font-weight: 500;
   font-size: 14px;
+}
+
+h1{
+  color: #fff;
+  font-size: 25px;
+  margin-bottom: 0;
 }
 
 h4 {
@@ -209,6 +232,14 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+}
+
+footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
 }
 
 .menu {
