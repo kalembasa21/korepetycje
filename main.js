@@ -32,3 +32,11 @@ window.addEventListener("resize", () => {
     offsetMenuBorder(activeItem, menuBorder);
     menu.style.setProperty("--timeOut", "none");
 });
+
+function confirmLogout() {
+    let confirmed = confirm("Czy na pewno chcesz się wylogować?");
+
+    if (confirmed) {
+        window.location.href = "/view/logout.php";
+    }
+}

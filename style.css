@@ -5,6 +5,11 @@ body {
   font-weight: 300;
   color: #ffb434;
   background-color: #fff;
+  overflow-x: hidden;
+}
+
+.center-body{
+  padding: 0 10px;
 }
 
 header{
@@ -23,6 +28,10 @@ header{
 .top-container img{
   height: auto;
   width: 100%;
+}
+
+.logout{
+  color: red;
 }
 
 p {
@@ -155,8 +164,7 @@ h6 span {
 }
 
 .formularz-styl {
-  padding: 13px 20px;
-  padding-left: 55px;
+  padding: 13px 20px 13px 60px;
   height: 48px;
   width: 100%;
   font-weight: 500;
@@ -226,12 +234,6 @@ html *,
 html *::before,
 html *::after {
   box-sizing: inherit;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
 }
 
 footer{

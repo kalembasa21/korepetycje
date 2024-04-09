@@ -7,25 +7,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <title>Korepetycje</title>
 </head>
 <body>
-<?php include_once('header.php'); ?>
+<?php include_once('header_sp.php'); ?>
 
 <div class="center-body">
-    <?php
-        session_start();
-
-        if (isset($_SESSION['user_id'])) {
-            include_once('./view/user.php');
-        } else {
-            include_once('register.php');
-        }
-    ?>
+    nigga
 </div>
 
-<?php include_once('footer.php'); ?>
-<script src="main.js"></script>
+<?php include_once('footer_sp.php'); ?>
+<script src="../main.js"></script>
 </body>
 </html>
