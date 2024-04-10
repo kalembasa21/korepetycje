@@ -3,15 +3,10 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-$host = 'localhost';
-$username = 'root';
-$password = '';
-$database = 'korepetycje';
+require_once("conn.php");
 
-$conn = new mysqli($host, $username, $password, $database);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if(isset($_SESSION['user_id'])){
+    $user_id = $_SESSION['user_id'];
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_submit'])) {
@@ -26,7 +21,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_submit'])) {
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        echo "Zalogowano pomyślnie";
         session_start();
         $_SESSION['user_id'] = $row['id'];
         header("Location: index.php");
@@ -42,6 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $numer_telefonu = $_POST['numer_telefonu'];
     $email = $_POST['email'];
     $haslo = $_POST['haslo'];
+    $rola = $_POST['rola'];
 
     $imie_nazwisko = mysqli_real_escape_string($conn, $imie_nazwisko);
     $klasa = mysqli_real_escape_string($conn, $klasa);
@@ -49,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $email = mysqli_real_escape_string($conn, $email);
     $haslo = mysqli_real_escape_string($conn, $haslo);
 
-    $sql = "INSERT INTO users (imie_nazwisko, klasa, numer_telefonu, email, haslo) VALUES ('$imie_nazwisko', '$klasa', '$numer_telefonu', '$email', '$haslo')";
+    $sql = "INSERT INTO users (imie_nazwisko, klasa, numer_telefonu, email, haslo, rola) VALUES ('$imie_nazwisko', '$klasa', '$numer_telefonu', '$email', '$haslo', '$rola')";
 
     if (!($conn->query($sql) === TRUE)) {
         echo "Error: " . $sql . "<br>" . $conn->error;
@@ -58,6 +53,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
 $conn->close();
 ?>
+
+<h4 style="text-align: center; background-color: #0257b1; padding: 10px; border-radius: 5px">Zaloguj się aby korzystać z wszystkich dostępnych funkcji!</h4>
 
 <div class="sekcja">
     <div class="kontener">
@@ -75,11 +72,11 @@ $conn->close();
                                         <h4 class="mb-4 pb-3">Zaloguj się</h4>
                                         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                                             <div class="grupa-formularza">
-                                                <input type="email" class="formularz-styl" placeholder="Email" name="login_email">
+                                                <input type="email" class="formularz-styl" required placeholder="Email" name="login_email">
                                                 <i class="ikona-inputu uil uil-at"></i>
                                             </div>
                                             <div class="grupa-formularza mt-2">
-                                                <input type="password" class="formularz-styl" placeholder="Hasło" name="login_haslo">
+                                                <input type="password" class="formularz-styl" required placeholder="Hasło" name="login_haslo">
                                                 <i class="ikona-inputu uil uil-lock-alt"></i>
                                             </div>
                                             <button type="submit" class="btn mt-4" name="login_submit">Zaloguj się</button>
@@ -93,24 +90,30 @@ $conn->close();
                                         <h4 class="mb-3 pb-3">Zarejestruj się</h4>
                                         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                                             <div class="grupa-formularza">
-                                                <input type="text" class="formularz-styl" placeholder="Imię i nazwisko" name="imie_nazwisko">
+                                                <input type="text" class="formularz-styl" required placeholder="Imię i nazwisko" name="imie_nazwisko">
                                                 <i class="ikona-inputu uil uil-user"></i>
                                             </div>
                                             <div class="grupa-formularza mt-2">
-                                                <input type="text" class="formularz-styl" placeholder="Klasa" name="klasa">
+                                                <input type="text" class="formularz-styl" required placeholder="Klasa" name="klasa">
                                                 <i class="ikona-inputu uil uil-backpack"></i>
                                             </div>
                                             <div class="grupa-formularza mt-2">
-                                                <input type="tel" class="formularz-styl" placeholder="Numer telefonu" name="numer_telefonu">
+                                                <input type="tel" class="formularz-styl" required placeholder="Numer telefonu" name="numer_telefonu">
                                                 <i class="ikona-inputu uil uil-phone"></i>
                                             </div>
                                             <div class="grupa-formularza mt-2">
-                                                <input type="email" class="formularz-styl" placeholder="Email" name="email">
+                                                <input type="email" class="formularz-styl" required placeholder="Email" name="email">
                                                 <i class="ikona-inputu uil uil-at"></i>
                                             </div>
                                             <div class="grupa-formularza mt-2">
-                                                <input type="password" class="formularz-styl" placeholder="Hasło" name="haslo">
+                                                <input type="password" class="formularz-styl" required placeholder="Hasło" name="haslo">
                                                 <i class="ikona-inputu uil uil-lock-alt"></i>
+                                            </div>
+                                            <div class="grupa-formularza mt-2">
+                                                <select name="rola" class="formularz-styl">
+                                                    <option value="student">Uczeń</option>
+                                                    <option value="tutor">Korepetytor</option>
+                                                </select>
                                             </div>
                                             <button type="submit" class="btn mt-4" name="submit">Zarejestruj się</button>
                                         </form>

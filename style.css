@@ -6,6 +6,7 @@ body {
   color: #ffb434;
   background-color: #fff;
   overflow-x: hidden;
+  margin: 0;
 }
 
 .center-body{
@@ -342,4 +343,91 @@ footer{
   .menu {
     font-size: 0.8em;
   }
+}
+
+.message-container {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.message {
+  margin-bottom: 10px;
+}
+
+#messageForm {
+  position: fixed;
+  bottom: 80px;
+  width: calc(100% - 40px);
+  left: 20px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  z-index: 999;
+}
+
+ul {list-style-type: none;}
+
+.month {
+  padding: 70px 25px;
+  width: 100%;
+  background: #0257b1;
+  text-align: center;
+}
+
+.month ul {
+  margin: 0;
+  padding: 0;
+}
+
+.month ul li {
+  color: white;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.month .prev {
+  float: left;
+  padding-top: 10px;
+}
+
+.month .next {
+  float: right;
+  padding-top: 10px;
+}
+
+.weekdays {
+  margin: 0;
+  padding: 10px 0;
+  background-color:#ffb434;
+}
+
+.weekdays li {
+  display: inline-block;
+  width: 13%;
+  color: #fff;
+  text-align: center;
+}
+
+.days {
+  padding: 10px 0;
+  background: #eee;
+  margin: 0;
+}
+
+.days li {
+  list-style-type: none;
+  display: inline-block;
+  width: 13%;
+  text-align: center;
+  margin-bottom: 5px;
+  font-size:12px;
+  color: #000;
+}
+
+.days li .active {
+  padding: 2px 5px;
+  background: #0257b1;
+  color: black !important
 }

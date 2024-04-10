@@ -1,4 +1,4 @@
-"use strict"; 
+"use strict";
 
 const body = document.body;
 const menu = body.querySelector(".menu");
@@ -26,13 +26,18 @@ function offsetMenuBorder(element, menuBorder) {
 offsetMenuBorder(activeItem, menuBorder);
 
 menuItems.forEach((item, index) => {
-    item.addEventListener("click", () => clickItem(item, index)); 
+    item.addEventListener("click", () => clickItem(item, index));
 })
 window.addEventListener("resize", () => {
     offsetMenuBorder(activeItem, menuBorder);
     menu.style.setProperty("--timeOut", "none");
 });
-
+$(document).ready(function() {
+    $('.menu__item').click(function() {
+        $('.menu__item').removeClass('active');
+        $(this).addClass('active');
+    });
+});
 function confirmLogout() {
     let confirmed = confirm("Czy na pewno chcesz się wylogować?");
 
@@ -40,40 +45,3 @@ function confirmLogout() {
         window.location.href = "/view/logout.php";
     }
 }
-
-document.addEventListener("DOMContentLoaded", function() {
-    const currentDate = new Date(2024, 3, 1);
-    const monthNames = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
-    const monthElement = document.getElementById("currentMonth");
-    const daysElement = document.querySelector(".days");
-
-    function renderCalendar(date) {
-        const year = date.getFullYear();
-        const month = date.getMonth();
-        const daysInMonth = new Date(year, month + 1, 0).getDate();
-        const firstDayIndex = new Date(year, month, 1).getDay();
-
-        monthElement.textContent = `${monthNames[month]} ${year}`;
-        daysElement.innerHTML = "";
-
-        for (let i = 0; i < firstDayIndex; i++) {
-            daysElement.innerHTML += `<div></div>`;
-        }
-
-        for (let i = 1; i <= daysInMonth; i++) {
-            daysElement.innerHTML += `<div>${i}</div>`;
-        }
-    }
-
-    renderCalendar(currentDate);
-
-    document.getElementById("prevMonth").addEventListener("click", function() {
-        currentDate.setMonth(currentDate.getMonth() - 1);
-        renderCalendar(currentDate);
-    });
-
-    document.getElementById("nextMonth").addEventListener("click", function() {
-        currentDate.setMonth(currentDate.getMonth() + 1);
-        renderCalendar(currentDate);
-    });
-});
