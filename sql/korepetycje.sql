@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 12 Lut 2024, 21:26
+-- Czas generowania: 10 Kwi 2024, 23:07
 -- Wersja serwera: 10.4.27-MariaDB
 -- Wersja PHP: 8.2.0
 
@@ -24,6 +24,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `chat_messages`
+--
+
+CREATE TABLE `chat_messages` (
+  `id` int(11) DEFAULT NULL,
+  `username` varchar(255) NOT NULL,
+  `message` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `users`
 --
 
@@ -33,19 +46,19 @@ CREATE TABLE `users` (
   `klasa` varchar(255) NOT NULL,
   `numer_telefonu` varchar(20) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
-  `haslo` varchar(255) NOT NULL
+  `haslo` varchar(255) NOT NULL,
+  `rola` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
-
---
--- Zrzut danych tabeli `users`
---
-
-INSERT INTO `users` (`id`, `imie_nazwisko`, `klasa`, `numer_telefonu`, `email`, `haslo`) VALUES
-(1, 'Jakub Sierant', '3a', '213769420', 'jakubsierant@gamil.com', 'Hasło123456');
 
 --
 -- Indeksy dla zrzutów tabel
 --
+
+--
+-- Indeksy dla tabeli `chat_messages`
+--
+ALTER TABLE `chat_messages`
+  ADD KEY `id` (`id`) USING BTREE;
 
 --
 -- Indeksy dla tabeli `users`
@@ -61,7 +74,17 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- Ograniczenia dla zrzutów tabel
+--
+
+--
+-- Ograniczenia dla tabeli `chat_messages`
+--
+ALTER TABLE `chat_messages`
+  ADD CONSTRAINT `chat_messages_ibfk_1` FOREIGN KEY (`id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
