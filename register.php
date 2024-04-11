@@ -111,8 +111,8 @@ $conn->close();
                                             </div>
                                             <div class="grupa-formularza mt-2">
                                                 <select name="rola" class="formularz-styl">
-                                                    <option value="student">Uczeń</option>
-                                                    <option value="tutor">Korepetytor</option>
+                                                    <option value="uczen">Uczeń</option>
+                                                    <option value="korepetytor">Korepetytor</option>
                                                 </select>
                                             </div>
                                             <button type="submit" class="btn mt-4" name="submit">Zarejestruj się</button>
