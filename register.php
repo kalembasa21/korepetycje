@@ -110,12 +110,12 @@ $conn->close();
                                                 <i class="ikona-inputu uil uil-lock-alt"></i>
                                             </div>
                                             <div class="grupa-formularza mt-2">
-                                                <select name="rola" class="formularz-styl">
+                                                <select id="rola" name="rola" class="formularz-styl">
                                                     <option value="uczen">Uczeń</option>
                                                     <option value="korepetytor">Korepetytor</option>
                                                 </select>
                                             </div>
-                                            <button type="submit" class="btn mt-4" name="submit">Zarejestruj się</button>
+                                            <button onclick="submitForm()" type="submit" class="btn mt-4" name="submit">Zarejestruj się</button>
                                         </form>
                                     </div>
                                 </div>

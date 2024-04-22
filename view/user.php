@@ -13,7 +13,6 @@ $user_id = $_SESSION['user_id'];
 require_once("conn.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-    // Handle form submission for editing user data
     $imie_nazwisko = $_POST['imie_nazwisko'];
     $klasa = $_POST['klasa'];
     $numer_telefonu = $_POST['numer_telefonu'];
@@ -33,6 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     } else {
         echo "Błąd aktualizacji danych: " . $conn->error;
     }
+
 }
 
 $sql = "SELECT * FROM users WHERE id = $user_id";
@@ -41,9 +41,43 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $username = $row['imie_nazwisko'];
-    echo '<br>' . "Witaj, $username!" . '<br>';
-} else {
-    echo "Błąd: Nie znaleziono informacji o użytkowniku.";
+    echo "Witaj, $username!" . '<br><br>';
+    $rola = $row['rola'];
+    $rola = mysqli_real_escape_string($conn, $rola);
+    if ($rola === 'korepetytor') {?>
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+            <div class="form-group">
+                <label for="subjects"><p>Wybierz z jakich przemiotów chcesz udzielać korepetycji:</p></label>
+                <input type="checkbox" name="subjects[]" value="Matematyka"> Matematyka<br>
+                <input type="checkbox" name="subjects[]" value="Fizyka"> Fizyka<br>
+                <input type="checkbox" name="subjects[]" value="Chemia"> Chemia<br>
+            </div>
+             <button type="submit">Submit</button>
+        </form>
+        <?php
+        if (isset($_POST['subject'])) {
+            $selected_subjects = $_POST['subject'];
+            $user_id = $_SESSION['user_id'];
+            $subjects_values = implode(",", $selected_subjects);
+
+            $sql = "UPDATE users SET subjects = '$subjects_values' WHERE id = $user_id";
+            if ($conn->query($sql) === TRUE) {
+                $sql = "SELECT subjects FROM users WHERE id = $user_id";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+                    $selected_subjects = explode(",", $row['subjects']);
+
+                    echo "<ul>";
+                    foreach ($selected_subjects as $subject) {
+                        echo "<li>$subject</li>";
+                    }
+                    echo "</ul>";
+                }
+            }
+        }
+    }
 }
 ?>
 <br>

@@ -10,7 +10,7 @@ body {
 }
 
 .center-body{
-  padding: 0 10px;
+  padding: 0 10px 100px 10px;
 }
 
 header{
@@ -65,8 +65,7 @@ h6 span {
   min-height: 100vh;
 }
 
-[type="checkbox"]:checked,
-[type="checkbox"]:not(:checked) {
+.checkbox{
   display: none;
 }
 

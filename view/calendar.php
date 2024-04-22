@@ -39,7 +39,7 @@
         <li>8</li>
         <li>9</li>
         <li>10</li>
-        <li><span class="active">11</span></li>
+        <li>11</li>
         <li>12</li>
         <li>13</li>
         <li>14</li>
@@ -50,7 +50,7 @@
         <li>19</li>
         <li>20</li>
         <li>21</li>
-        <li>22</li>
+        <li><span class="active">22</span></li>
         <li>23</li>
         <li>24</li>
         <li>25</li>
@@ -60,7 +60,6 @@
         <li>29</li>
         <li>30</li>
     </ul>
-
 <!--    <div class="calendar">-->
 <!--        <div class="controls">-->
 <!--            <button id="prevMonth">Poprzedni miesiąc</button>-->
