@@ -47,22 +47,23 @@ if ($result->num_rows > 0) {
     if ($rola === 'korepetytor') {?>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <div class="form-group">
-                <label for="subjects"><p>Wybierz z jakich przemiotów chcesz udzielać korepetycji:</p></label>
-                <input type="checkbox" name="subjects[]" value="Matematyka"> Matematyka<br>
-                <input type="checkbox" name="subjects[]" value="Fizyka"> Fizyka<br>
-                <input type="checkbox" name="subjects[]" value="Chemia"> Chemia<br>
+                <label for="subject"><p>Wybierz z jakich przemiotów chcesz udzielać korepetycji:</p></label>
+                <input type="checkbox" name="subject" value="Matematyka"> Matematyka<br>
+                <input type="checkbox" name="subject" value="Fizyka"> Fizyka<br>
+                <input type="checkbox" name="subject" value="Chemia"> Chemia<br>
             </div>
              <button type="submit">Submit</button>
-        </form>
+        </form><br>
         <?php
         if (isset($_POST['subject'])) {
             $selected_subjects = $_POST['subject'];
             $user_id = $_SESSION['user_id'];
             $subjects_values = implode(",", $selected_subjects);
 
-            $sql = "UPDATE users SET subjects = '$subjects_values' WHERE id = $user_id";
+            $sql = "UPDATE users SET przedmioty = '$subjects_values' WHERE id = $user_id";
+            $conn->query($sql);
             if ($conn->query($sql) === TRUE) {
-                $sql = "SELECT subjects FROM users WHERE id = $user_id";
+                $sql = "SELECT przedmioty FROM users WHERE id = $user_id";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
@@ -80,7 +81,6 @@ if ($result->num_rows > 0) {
     }
 }
 ?>
-<br>
 <p>Możesz edytować swoje dane poniżej</p>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
     <div class="grupa-formularza">
