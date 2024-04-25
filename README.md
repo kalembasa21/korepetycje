@@ -3,7 +3,7 @@
 Autor: Kacper Kalembasa
 
 ## 1. Wprowadzenie
-Aplikacja jest platformą edukacyjną, która umożliwia zarządzanie kursami, materiałami kursu, postępami studentów oraz certyfikatami. Aplikacja obsługuje dwie role użytkowników: Instructor i Student.
+Aplikacja jest platformą edukacyjną, która umożliwia udzielanie korepetycji oraz materiałami kursu. Aplikacja obsługuje dwie role użytkowników: Korepetytor i Uczeń.
 
 ## 2. Wymagania funkcjonalne
 Rejestracja: Aplikacja umożliwia nowym użytkownikom rejestrację do systemu. Użytkownik musi podać imię oraz nazwisko, klasę, numer telefonu, email, hasło, aby utworzyć nowe konto się do systemu. Użytkownik musi również wybrać swoją rolę (korepetytor, uczeń) podczas rejestracji.
