@@ -12,12 +12,22 @@ $user_id = $_SESSION['user_id'];
 
 require_once("conn.php");
 
+$sql = "SELECT * FROM users WHERE id = $user_id";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $username = htmlspecialchars($row['imie_nazwisko']);
+    echo "Witaj, $username!" . '<br><br>';
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-    $imie_nazwisko = $_POST['imie_nazwisko'];
-    $klasa = $_POST['klasa'];
-    $numer_telefonu = $_POST['numer_telefonu'];
-    $email = $_POST['email'];
-    $haslo = $_POST['haslo'];
+    $imie_nazwisko = htmlspecialchars($_POST['imie_nazwisko']);
+    $klasa = htmlspecialchars($_POST['klasa']);
+    $numer_telefonu = htmlspecialchars($_POST['numer_telefonu']);
+    $email = htmlspecialchars($_POST['email']);
+    $haslo = htmlspecialchars($_POST['haslo']);
+
 
     $imie_nazwisko = mysqli_real_escape_string($conn, $imie_nazwisko);
     $klasa = mysqli_real_escape_string($conn, $klasa);
@@ -33,82 +43,77 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         echo "Błąd aktualizacji danych: " . $conn->error;
     }
 
-}
+    if (isset($_POST['przedmioty'])) {
+        $selected_subjects = $_POST['przedmioty'];
+        $subjects_values = implode(" ", $selected_subjects);
 
-$sql = "SELECT * FROM users WHERE id = $user_id";
-$result = $conn->query($sql);
+        $sql = "UPDATE users SET przedmioty = '$subjects_values' WHERE id = $user_id";
+        if ($conn->query($sql) === TRUE) {
+            $sql = "SELECT przedmioty FROM users WHERE id = $user_id";
+            $result = $conn->query($sql);
 
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $username = $row['imie_nazwisko'];
-    echo "Witaj, $username!" . '<br><br>';
-    $rola = $row['rola'];
-    $rola = mysqli_real_escape_string($conn, $rola);
-    if ($rola === 'korepetytor') {?>
-        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-            <div class="form-group">
-                <label for="subject"><p>Wybierz z jakich przemiotów chcesz udzielać korepetycji:</p></label>
-                <input type="checkbox" name="subject" value="Matematyka"> Matematyka<br>
-                <input type="checkbox" name="subject" value="Fizyka"> Fizyka<br>
-                <input type="checkbox" name="subject" value="Chemia"> Chemia<br>
-            </div>
-             <button type="submit">Submit</button>
-        </form><br>
-        <?php
-        if (isset($_POST['subject'])) {
-            $selected_subjects = $_POST['subject'];
-            $user_id = $_SESSION['user_id'];
-            $subjects_values = implode(",", $selected_subjects);
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $selected_subjects = explode(" ", $row['przedmioty']);
 
-            $sql = "UPDATE users SET przedmioty = '$subjects_values' WHERE id = $user_id";
-            $conn->query($sql);
-            if ($conn->query($sql) === TRUE) {
-                $sql = "SELECT przedmioty FROM users WHERE id = $user_id";
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-                    $row = $result->fetch_assoc();
-                    $selected_subjects = explode(",", $row['subjects']);
-
-                    echo "<ul>";
-                    foreach ($selected_subjects as $subject) {
-                        echo "<li>$subject</li>";
-                    }
-                    echo "</ul>";
+                echo "<ul>";
+                foreach ($selected_subjects as $subject) {
+                    echo "<li>$subject</li>";
                 }
+                echo "</ul>";
             }
         }
     }
 }
 ?>
 <p>Możesz edytować swoje dane poniżej</p>
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+<form method="post" action="index.php" onsubmit="refreshPage()">
     <div class="grupa-formularza">
-        <input type="text" class="formularz-styl" placeholder="Imię i nazwisko" name="imie_nazwisko" value="<?php echo $row['imie_nazwisko']; ?>">
+        <input type="text" class="formularz-styl" placeholder="Imię i nazwisko" name="imie_nazwisko" value="<?php echo isset($row['imie_nazwisko']) ? htmlspecialchars($row['imie_nazwisko']) : ''; ?>">
         <i class="ikona-inputu uil uil-user"></i>
     </div>
     <div class="grupa-formularza mt-2">
-        <input type="text" class="formularz-styl" placeholder="Klasa" name="klasa" value="<?php echo $row['klasa']; ?>">
+        <input type="text" class="formularz-styl" placeholder="Klasa" name="klasa" value="<?php echo isset($row['klasa']) ? htmlspecialchars($row['klasa']) : ''; ?>">
         <i class="ikona-inputu uil uil-backpack"></i>
     </div>
     <div class="grupa-formularza mt-2">
-        <input type="tel" class="formularz-styl" placeholder="Numer telefonu" name="numer_telefonu" value="<?php echo $row['numer_telefonu']; ?>">
+        <input type="tel" class="formularz-styl" placeholder="Numer telefonu" name="numer_telefonu" value="<?php echo isset($row['numer_telefonu']) ? htmlspecialchars($row['numer_telefonu']) : ''; ?>">
         <i class="ikona-inputu uil uil-phone"></i>
     </div>
     <div class="grupa-formularza mt-2">
-        <input type="email" class="formularz-styl" placeholder="Email" name="email" value="<?php echo $row['email']; ?>">
+        <input type="email" class="formularz-styl" placeholder="Email" name="email" value="<?php echo isset($row['email']) ? htmlspecialchars($row['email']) : ''; ?>">
         <i class="ikona-inputu uil uil-at"></i>
     </div>
     <div class="grupa-formularza mt-2">
-        <input type="password" class="formularz-styl" placeholder="Hasło" name="haslo" value="<?php echo $row['haslo']; ?>">
+        <input type="password" class="formularz-styl" placeholder="Hasło" name="haslo" value="<?php echo isset($row['haslo']) ? htmlspecialchars($row['haslo']) : ''; ?>">
         <i class="ikona-inputu uil uil-lock-alt"></i>
     </div>
+    <?php
+    $rola = isset($row['rola']) ? $row['rola'] : '';
+    $rola = mysqli_real_escape_string($conn, $rola);
+    if ($rola === 'korepetytor') {?>
+        <div class="grupa-formularza mt-2">
+            <label for="przedmioty">Wybierz z jakich przemiotów chcesz udzielać korepetycji:</label>
+            <select name="przedmioty[]" id="przedmioty" multiple>
+                <option value="matematyka">Matematyka</option>
+                <option value="język angielski">Język angielski</option>
+                <option value="historia">Historia</option>
+            </select>
+        </div>
+        <?php
+    }
+    ?>
     <button type="submit" class="btn mt-4" name="submit">Zapisz zmiany</button>
 </form>
+
 <br>
 <a class="logout" href="#" onclick="confirmLogout()">Wyloguj się</a>
 
 <script>
+    function refreshPage() {
+        window.location.reload();
+    }
+
     function confirmLogout() {
         if (confirm("Czy na pewno chcesz się wylogować?")) {
             window.location.href = "/view/logout.php";
