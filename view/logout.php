@@ -3,6 +3,6 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 session_destroy();
-header("Location: /korepetycje/index.php");
+header("Location: ../korepetycje/index.php");
 exit;
 ?>

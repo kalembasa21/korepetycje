@@ -65,6 +65,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         }
     }
 }
+$sql = "SELECT * FROM users WHERE id = $user_id";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+}
 ?>
 <p>Możesz edytować swoje dane poniżej</p>
 <form method="post" action="index.php" onsubmit="refreshPage()">
@@ -96,8 +102,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
             <label for="przedmioty">Wybierz z jakich przemiotów chcesz udzielać korepetycji:</label>
             <select name="przedmioty[]" id="przedmioty" multiple>
                 <option value="matematyka">Matematyka</option>
-                <option value="język angielski">Język angielski</option>
+                <option value="j angielski">J. angielski</option>
                 <option value="historia">Historia</option>
+                <option value="biologia">Biologia</option>
+                <option value="chemia">Chemia</option>
+                <option value="fizyka">Fizyka</option>
+                <option value="j polski">J. polski</option>
+                <option value="geografia">Geografia</option>
+                <option value="informatyka">Informatyka</option>
+                <option value="j niemiecki">J. niemiecki</option>
+                <option value="proj oprogramowania">Proj. oprogramowania</option>
+                <option value="wos">WOS</option>
+                <option value="edb">EDB</option>
+                <option value="bhp">BHP</option>
+                <option value="wf">WF</option>
+                <option value="plastyka">Plastyka</option>
+                <option value="Bazy danych">Bazy danych</option>
+                <option value="ap desk">Ap. desk.</option>
+                <option value="j ang zaw">J. ang. zaw.</option>
+                <option value="pp">P.P.</option>
+                <option value="ap int">Ap. int.</option>
+                <option value="obiektowka">obiektowka</option>
             </select>
         </div>
         <?php
