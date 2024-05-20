@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 10 Kwi 2024, 23:07
+-- Czas generowania: 18 Maj 2024, 16:25
 -- Wersja serwera: 10.4.27-MariaDB
 -- Wersja PHP: 8.2.0
 
@@ -34,6 +34,14 @@ CREATE TABLE `chat_messages` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
+--
+-- Zrzut danych tabeli `chat_messages`
+--
+
+INSERT INTO `chat_messages` (`id`, `username`, `message`, `created_at`) VALUES
+(NULL, 'Kacper Kalembasa', 'witam', '2024-04-11 07:56:15'),
+(NULL, 'Jakub Ciećka', 'no elo elo', '2024-04-11 07:58:17');
+
 -- --------------------------------------------------------
 
 --
@@ -47,8 +55,17 @@ CREATE TABLE `users` (
   `numer_telefonu` varchar(20) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
   `haslo` varchar(255) NOT NULL,
-  `rola` varchar(20) NOT NULL
+  `rola` varchar(20) NOT NULL,
+  `przedmioty` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+--
+-- Zrzut danych tabeli `users`
+--
+
+INSERT INTO `users` (`id`, `imie_nazwisko`, `klasa`, `numer_telefonu`, `email`, `haslo`, `rola`, `przedmioty`) VALUES
+(9, 'Kacper Kalembasa', '3a', '1111111111', 'yes@gmail.com', '12345678', 'uczen', ''),
+(10, 'Jakub Ciećka', '3a', '213769429', 'cieciek@gmail.com', 'cieciek', 'korepetytor', 'matematyka język angielski historia');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -74,7 +91,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Ograniczenia dla zrzutów tabel
