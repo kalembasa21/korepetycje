@@ -17,7 +17,7 @@ if (!(isset($_SESSION['user_id']))) {
     header("Location: ../index.php");
     exit();
 }
-include_once('header_sp.php');
+include_once('../header.php');
 ?>
 <div class="center-body">
 <div class="container">
@@ -33,7 +33,7 @@ include_once('header_sp.php');
     </div>
 </form>
 </div>
-<?php include_once('footer_sp.php'); ?>
+<?php include_once('../footer.php'); ?>
 <script src="../main.js"></script>
 <script>
     function fetchMessages() {

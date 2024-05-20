@@ -8,7 +8,7 @@
             </a>
         </button>
 
-        <button class="menu__item active">
+        <button class="menu__item">
             <a href="general_chat.php">
                 <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="chat">
                     <path d="M18,2H6A3,3,0,0,0,3,5V16a3,3,0,0,0,3,3H8.59l2.7,2.71A1,1,0,0,0,12,22a1,1,0,0,0,.65-.24L15.87,19H18a3,3,0,0,0,3-3V5A3,3,0,0,0,18,2Zm1,14a1,1,0,0,1-1,1H15.5a1,1,0,0,0-.65.24l-2.8,2.4L9.71,17.29A1,1,0,0,0,9,17H6a1,1,0,0,1-1-1V5A1,1,0,0,1,6,4H18a1,1,0,0,1,1,1Z"></path>
@@ -16,7 +16,7 @@
             </a>
         </button>
 
-        <button class="menu__item">
+        <button class="menu__item active">
             <a href="users_chats.php">
                 <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="mobile-android">
                     <path d="M12.71,16.29l-.15-.12a.76.76,0,0,0-.18-.09L12.2,16a1,1,0,0,0-.91.27,1.15,1.15,0,0,0-.21.33,1,1,0,0,0,1.3,1.31,1.46,1.46,0,0,0,.33-.22,1,1,0,0,0,.21-1.09A1,1,0,0,0,12.71,16.29ZM16,2H8A3,3,0,0,0,5,5V19a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V5A3,3,0,0,0,16,2Zm1,17a1,1,0,0,1-1,1H8a1,1,0,0,1-1-1V5A1,1,0,0,1,8,4h8a1,1,0,0,1,1,1Z"></path>
