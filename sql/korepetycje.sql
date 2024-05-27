@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 18 Maj 2024, 16:25
+-- Czas generowania: 27 Maj 2024, 22:57
 -- Wersja serwera: 10.4.27-MariaDB
 -- Wersja PHP: 8.2.0
 
@@ -20,6 +20,16 @@ SET time_zone = "+00:00";
 --
 -- Baza danych: `korepetycje`
 --
+
+DELIMITER $$
+--
+-- Procedury
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetUsers` ()   BEGIN
+    SELECT * FROM users;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -40,7 +50,9 @@ CREATE TABLE `chat_messages` (
 
 INSERT INTO `chat_messages` (`id`, `username`, `message`, `created_at`) VALUES
 (NULL, 'Kacper Kalembasa', 'witam', '2024-04-11 07:56:15'),
-(NULL, 'Jakub Ciećka', 'no elo elo', '2024-04-11 07:58:17');
+(NULL, 'Jakub Ciećka', 'no elo elo', '2024-04-11 07:58:17'),
+(NULL, 'Jakub Ciećka', 'siema', '2024-05-20 16:47:53'),
+(NULL, 'cieciek', 'cieciek', '2024-05-27 20:37:19');
 
 -- --------------------------------------------------------
 
@@ -64,8 +76,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `imie_nazwisko`, `klasa`, `numer_telefonu`, `email`, `haslo`, `rola`, `przedmioty`) VALUES
-(9, 'Kacper Kalembasa', '3a', '1111111111', 'yes@gmail.com', '12345678', 'uczen', ''),
-(10, 'Jakub Ciećka', '3a', '213769429', 'cieciek@gmail.com', 'cieciek', 'korepetytor', 'matematyka język angielski historia');
+(24, 'cieciek', 'cieciek', 'cieciek', 'cieciek@gmail.com', 'cieciek', '', '');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -91,7 +102,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Ograniczenia dla zrzutów tabel
