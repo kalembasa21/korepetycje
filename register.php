@@ -13,20 +13,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_submit'])) {
     $login_email = $_POST['login_email'];
     $login_haslo = $_POST['login_haslo'];
 
-    $login_email = mysqli_real_escape_string($conn, $login_email);
-    $login_haslo = mysqli_real_escape_string($conn, $login_haslo);
+    $email = filter_var($login_email, FILTER_SANITIZE_EMAIL);
+    $haslo = filter_var($login_haslo, FILTER_SANITIZE_STRING);
 
-    $sql = "SELECT * FROM users WHERE email='$login_email' AND haslo='$login_haslo'";
-    $result = $conn->query($sql);
+    $stmt = $conn->prepare("SELECT id, imie_nazwisko, haslo FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $stmt->store_result();
 
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        session_start();
-        $_SESSION['user_id'] = $row['id'];
-        header("Location: index.php");
-        exit();
+    if ($stmt->num_rows > 0) {
+        $stmt->bind_result($user_id, $username, $hashed_password);
+        $stmt->fetch();
+
+        if (password_verify($haslo, $hashed_password)) {
+            session_start();
+            $_SESSION['user_id'] = $user_id;
+            header("Location: index.php");
+            exit();
+        } else {
+            echo "Nieprawidłowe hasło";
+        }
     } else {
-        echo "Nieprawidłowy email lub hasło";
+        echo "Nie znaleziono użytkownika z podanym adresem email.";
     }
 }
 
@@ -36,18 +44,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $numer_telefonu = $_POST['numer_telefonu'];
     $email = $_POST['email'];
     $haslo = $_POST['haslo'];
-    $rola = $_POST['rola'];
 
-    $imie_nazwisko = mysqli_real_escape_string($conn, $imie_nazwisko);
-    $klasa = mysqli_real_escape_string($conn, $klasa);
-    $numer_telefonu = mysqli_real_escape_string($conn, $numer_telefonu);
-    $email = mysqli_real_escape_string($conn, $email);
-    $haslo = mysqli_real_escape_string($conn, $haslo);
+    $imie_nazwisko = filter_var($imie_nazwisko, FILTER_SANITIZE_STRING);
+    $klasa = filter_var($klasa, FILTER_SANITIZE_STRING);
+    $numer_telefonu = filter_var($numer_telefonu, FILTER_SANITIZE_STRING);
+    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+    $haslo = filter_var($haslo, FILTER_SANITIZE_STRING);
 
-    $sql = "INSERT INTO users (imie_nazwisko, klasa, numer_telefonu, email, haslo, rola) VALUES ('$imie_nazwisko', '$klasa', '$numer_telefonu', '$email', '$haslo', '$rola')";
+    $hashed_password = password_hash($haslo, PASSWORD_DEFAULT);
 
-    if (!($conn->query($sql) === TRUE)) {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+    $stmt = $conn->prepare("INSERT INTO users (imie_nazwisko, klasa, numer_telefonu, email, haslo) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssss", $imie_nazwisko, $klasa, $numer_telefonu, $email, $hashed_password);
+
+    if ($stmt->execute()) {
+        echo "Rejestracja zakończona pomyślnie." . "<br>";
+    } else {
+        echo "Błąd rejestracji: " . $stmt->error;
     }
 }
 
@@ -106,16 +118,11 @@ $conn->close();
                                                 <i class="ikona-inputu uil uil-at"></i>
                                             </div>
                                             <div class="grupa-formularza mt-2">
-                                                <input type="password" class="formularz-styl" required placeholder="Hasło" name="haslo">
+                                                <input type="password" class="formularz-styl" required placeholder="Hasło" name="haslo" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}">
+<!--                                                <small>Hasło musi zawierać przynajmniej 8 znaków (jedną cyfrę, jeden znak specjalny, jedną małą i jedną dużą literę).</small>-->
                                                 <i class="ikona-inputu uil uil-lock-alt"></i>
                                             </div>
-                                            <div class="grupa-formularza mt-2">
-                                                <select id="rola" name="rola" class="formularz-styl">
-                                                    <option value="uczen">Uczeń</option>
-                                                    <option value="korepetytor">Korepetytor</option>
-                                                </select>
-                                            </div>
-                                            <button onclick="submitForm()" type="submit" class="btn mt-4" name="submit">Zarejestruj się</button>
+                                            <button type="submit" class="btn mt-4" name="submit">Zarejestruj się</button>
                                         </form>
                                     </div>
                                 </div>

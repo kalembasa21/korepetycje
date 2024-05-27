@@ -9,57 +9,57 @@
 </head>
 <body>
 <?php include_once('header_sp.php'); ?><br>
-<div class="center-body">
-    <div class="month">
-        <ul>
-            <li class="prev">&#10094;</li>
-            <li class="next">&#10095;</li>
-            <li>Kwiecień<br><span style="font-size:18px">2024</span></li>
-        </ul>
-    </div>
-
-    <ul class="weekdays">
-        <li>P</li>
-        <li>Wt</li>
-        <li>Śr</li>
-        <li>Czw</li>
-        <li>Pt</li>
-        <li>So</li>
-        <li>N</li>
-    </ul>
-
-    <ul class="days">
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-        <li>6</li>
-        <li>7</li>
-        <li>8</li>
-        <li>9</li>
-        <li>10</li>
-        <li>11</li>
-        <li>12</li>
-        <li>13</li>
-        <li>14</li>
-        <li>15</li>
-        <li>16</li>
-        <li>17</li>
-        <li>18</li>
-        <li>19</li>
-        <li>20</li>
-        <li>21</li>
-        <li><span class="active">22</span></li>
-        <li>23</li>
-        <li>24</li>
-        <li>25</li>
-        <li>26</li>
-        <li>27</li>
-        <li>28</li>
-        <li>29</li>
-        <li>30</li>
-    </ul>
+<!--<div class="center-body">-->
+<!--    <div class="month">-->
+<!--        <ul>-->
+<!--            <li class="prev">&#10094;</li>-->
+<!--            <li class="next">&#10095;</li>-->
+<!--            <li>Kwiecień<br><span style="font-size:18px">2024</span></li>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!---->
+<!--    <ul class="weekdays">-->
+<!--        <li>P</li>-->
+<!--        <li>Wt</li>-->
+<!--        <li>Śr</li>-->
+<!--        <li>Czw</li>-->
+<!--        <li>Pt</li>-->
+<!--        <li>So</li>-->
+<!--        <li>N</li>-->
+<!--    </ul>-->
+<!---->
+<!--    <ul class="days">-->
+<!--        <li>1</li>-->
+<!--        <li>2</li>-->
+<!--        <li>3</li>-->
+<!--        <li>4</li>-->
+<!--        <li>5</li>-->
+<!--        <li>6</li>-->
+<!--        <li>7</li>-->
+<!--        <li>8</li>-->
+<!--        <li>9</li>-->
+<!--        <li>10</li>-->
+<!--        <li>11</li>-->
+<!--        <li>12</li>-->
+<!--        <li>13</li>-->
+<!--        <li>14</li>-->
+<!--        <li>15</li>-->
+<!--        <li>16</li>-->
+<!--        <li>17</li>-->
+<!--        <li>18</li>-->
+<!--        <li>19</li>-->
+<!--        <li>20</li>-->
+<!--        <li>21</li>-->
+<!--        <li><span class="active">22</span></li>-->
+<!--        <li>23</li>-->
+<!--        <li>24</li>-->
+<!--        <li>25</li>-->
+<!--        <li>26</li>-->
+<!--        <li>27</li>-->
+<!--        <li>28</li>-->
+<!--        <li>29</li>-->
+<!--        <li>30</li>-->
+<!--    </ul>-->
 <!--    <div class="calendar">-->
 <!--        <div class="controls">-->
 <!--            <button id="prevMonth">Poprzedni miesiąc</button>-->
@@ -80,7 +80,7 @@
 <!--    </div>-->
 </div>
 <?php include_once('footer_sp.php'); ?>
-<script src="../main.js"></script>
+<!--<script src="../main.js"></script>-->
 <!--<script>-->
 <!--    document.addEventListener("DOMContentLoaded", function() {-->
 <!--        const currentDate = new Date(2024, 3, 1);-->

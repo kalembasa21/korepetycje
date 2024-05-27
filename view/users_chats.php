@@ -10,9 +10,22 @@
     <title>Document</title>
 </head>
 <body>
-<?php require_once("header_sp.php") ?>
+<?php require_once("header_sp.php");
 
-<?php require_once("footer_sp.php") ?>
+require_once("../conn.php");
+
+$sql = "CALL GetUsers()";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo "ID: " . $row["id"] . " - Imię i nazwisko: " . $row["imie_nazwisko"] . "<br>";
+    }
+} else {
+    echo "Brak użytkowników w bazie danych";
+}
+
+require_once("footer_sp.php"); ?>
 <script src="../main.js"></script>
 </body>
 </html>
