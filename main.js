@@ -38,10 +38,9 @@ $(document).ready(function() {
         $(this).addClass('active');
     });
 });
-function confirmLogout() {
-    let confirmed = confirm("Czy na pewno chcesz się wylogować?");
 
-    if (confirmed) {
-        window.location.href = "/view/logout.php";
+function confirmLogout() {
+    if (confirm("Czy na pewno chcesz się wylogować?")) {
+        window.location.href = "./view/logout.php";
     }
 }

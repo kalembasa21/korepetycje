@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $conn->begin_transaction();
 
     try {
-        $sql = "UPDATE users SET imie_nazwisko='$imie_nazwisko', klasa='$klasa', numer_telefonu='$numer_telefonu', email='$email', haslo='$haslo' WHERE id=$user_id";
+        $sql = "UPDATE users SET imie_nazwisko='$imie_nazwisko', klasa='$klasa', numer_telefonu='$numer_telefonu', email='$email', haslo='$hashed_password' WHERE id=$user_id";
         $conn->query($sql);
 
         $conn->commit();
@@ -119,13 +119,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 <br>
 <a class="logout" href="#" onclick="confirmLogout()">Wyloguj się</a>
 
-<script>
+<!-- <script>
     function confirmLogout() {
         if (confirm("Czy na pewno chcesz się wylogować?")) {
-            window.location.href = "/korepetycje/view/logout.php";
+            window.location.href = "logout.php";
         }
     }
-</script>
+</script> -->
 
 <?php
 $conn->close();

@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login_submit'])) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $imie_nazwisko = $_POST['imie_nazwisko'];
-    $klasa = $_POST['klasa'];
+    $klasa = $_POST['klasa'];0
     $numer_telefonu = $_POST['numer_telefonu'];
     $email = $_POST['email'];
     $haslo = $_POST['haslo'];
