@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 27 Maj 2024, 22:57
+-- Czas generowania: 28 Maj 2024, 09:26
 -- Wersja serwera: 10.4.27-MariaDB
--- Wersja PHP: 8.2.0
+-- Wersja PHP: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -76,7 +76,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `imie_nazwisko`, `klasa`, `numer_telefonu`, `email`, `haslo`, `rola`, `przedmioty`) VALUES
-(24, 'cieciek', 'cieciek', 'cieciek', 'cieciek@gmail.com', 'cieciek', '', '');
+(25, 'cieciek', '2R', '111111111', 'cieciek@gmail.com', '$2y$10$WmrIhcKAxBv5zM8kBkQOCufL0fyz8J16GeBkdfqEc25UudL7qrxRe', '', ''),
+(26, 'test', '3A', '213742069', 'test@gmail.com', '$2y$10$j/bB2fwxHBgr9OUAyv2bQeg7aDcOSLjAg/vY5RxHFqHRMieJ0etuW', '', '');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -102,7 +103,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Ograniczenia dla zrzutów tabel
