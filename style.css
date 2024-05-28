@@ -9,6 +9,10 @@ body {
   margin: 0;
 }
 
+a{
+  text-decoration: none;
+}
+
 .center-body{
   padding: 0 10px 100px 10px;
 }

@@ -122,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 <script>
     function confirmLogout() {
         if (confirm("Czy na pewno chcesz się wylogować?")) {
-            window.location.href = "/view/logout.php";
+            window.location.href = "/korepetycje/view/logout.php";
         }
     }
 </script>

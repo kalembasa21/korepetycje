@@ -14,16 +14,53 @@
 
 require_once("../conn.php");
 
+$order = "ASC";
+if (isset($_GET['order']) && $_GET['order'] == 'DESC') {
+    $order = "DESC";
+}
+
 $sql = "CALL GetUsers()";
 $result = $conn->query($sql);
 
+$users = [];
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        echo "ID: " . $row["id"] . " - Imię i nazwisko: " . $row["imie_nazwisko"] . "<br>";
+        $users[] = $row;
     }
-} else {
-    echo "Brak użytkowników w bazie danych";
 }
+
+usort($users, function($a, $b) use ($order) {
+    if ($order == 'ASC') {
+        return $a['id'] <=> $b['id'];
+    } else {
+        return $b['id'] <=> $a['id'];
+    }
+});
+
+$new_order = $order == 'ASC' ? 'DESC' : 'ASC';
+
+echo '<table border="1">
+        <tr>
+            <th><a href="?order=' . $new_order . '">ID</a></th>
+            <th>Imię i nazwisko</th>
+            <th>Klasa</th>
+            <th>Numer telefonu</th>
+            <th>Email</th>
+        </tr>';
+
+foreach ($users as $row) {
+    echo '<tr>
+            <td>' . $row["id"] . '</td>
+            <td>' . $row["imie_nazwisko"] . '</td>
+            <td>' . $row["klasa"] . '</td>
+            <td>' . $row["numer_telefonu"] . '</td>
+            <td>' . $row["email"] . '</td>
+          </tr>';
+}
+
+echo '</table>';
+
+
 
 require_once("footer_sp.php"); ?>
 <script src="../main.js"></script>
